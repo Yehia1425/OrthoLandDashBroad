@@ -1,0 +1,10 @@
+<form [formGroup]="deleteOfferForm" (ngSubmit)="deleteOffer()">
+
+<div class="form-group">
+<label>Offer Id</label>
+<input type="number" class="form-control" formControlName="id">
+</div>
+
+<button class="btn btn-danger mt-3">Delete Offer</button>
+
+</form>

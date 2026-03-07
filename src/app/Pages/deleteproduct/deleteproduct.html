@@ -1,0 +1,10 @@
+<form [formGroup]="deleteForm" (ngSubmit)="deleteProduct()">
+
+<div class="form-group">
+<label>Product Id</label>
+<input type="number" class="form-control" formControlName="id">
+</div>
+
+<button class="btn btn-danger mt-3">Delete Product</button>
+
+</form>

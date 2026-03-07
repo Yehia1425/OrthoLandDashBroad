@@ -1,0 +1,107 @@
+<form [formGroup]="viewOrdersForm" (ngSubmit)="getOrders()">
+
+<div class="form-group">
+<label>Start From</label>
+<input type="date" class="form-control" formControlName="startFrom">
+</div>
+
+<div class="form-group">
+<label>Not Confirmed Only</label>
+<input type="checkbox" formControlName="notConfirmedOnly">
+</div>
+
+<button class="btn btn-primary mt-3">
+View Orders
+</button>
+
+</form>
+
+
+<div>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+<th>Order Id</th>
+<th>User Name</th>
+<th>Phone</th>
+<th>Date</th>
+<th>Total Price</th>
+<th>Confirmed</th>
+<th>Address</th>
+<th>Notes</th>
+<th>Items</th>
+</tr>
+</thead>
+
+<tbody>
+
+@for (view of orders(); track view.id) {
+
+<tr>
+
+<td>{{view.id}}</td>
+<td>{{view.userName}}</td>
+<td>{{view.userNumber}}</td>
+<td>{{view.orderDate}}</td>
+<td>{{view.totalPrice}}</td>
+<td>{{view.orderConfirmation}}</td>
+<td>{{view.address}}</td>
+<td>{{view.notes}}</td>
+
+<td>
+
+<table class="table table-sm">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Description</th>
+<th>Total</th>
+<th>Offer</th>
+</tr>
+</thead>
+
+<tbody>
+
+@for (vie of view.items; track $index) {
+
+<tr>
+<td>{{vie.name}}</td>
+<td>{{vie.price}}</td>
+<td>{{vie.quantity}}</td>
+<td>{{vie.description}}</td>
+<td>{{vie.itemTotalPrice}}</td>
+<td>{{vie.offerApplied}}</td>
+</tr>
+
+
+
+
+
+<td>
+<button class="btn btn-success"
+(click)="confirmOrder(view.id)">
+Confirm
+</button>
+</td>
+}
+
+</tbody>
+
+</table>
+
+</td>
+
+</tr>
+
+}
+
+</tbody>
+
+</table>
+
+</div>

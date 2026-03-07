@@ -1,0 +1,39 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-update-categories',
+  imports: [ReactiveFormsModule],
+  templateUrl: './update-categories.html',
+  styleUrl: './update-categories.css',
+})
+export class UpdateCategories {
+    private readonly ToastrService=inject(ToastrService);
+
+BaseUrl = "http://ourtholandadmin.runasp.net";
+
+updateCategoryForm = new FormGroup({
+  id: new FormControl(''),
+  name: new FormControl('')
+});
+
+constructor(private http: HttpClient) {}
+
+updateCategory() {
+
+  const id = this.updateCategoryForm.value.id;
+
+  const body = {
+    name: this.updateCategoryForm.value.name
+  };
+
+  this.http.put(`${this.BaseUrl}/UpdateCategory/${id}`, body)
+    .subscribe(res => {
+      console.log("Category Updated", res);
+     this.ToastrService.success("Update Categories","Update Categories Succefully")
+    });
+
+}
+}

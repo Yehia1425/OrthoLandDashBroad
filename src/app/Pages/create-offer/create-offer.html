@@ -1,0 +1,32 @@
+<form [formGroup]="offerForm" (ngSubmit)="submitOffer()">
+
+<div class="form-group">
+<label>Buy Quantity</label>
+<input type="number" class="form-control" formControlName="buyQuantity">
+</div>
+
+<div class="form-group">
+<label>Get Quantity</label>
+<input type="number" class="form-control" formControlName="getQuantity">
+</div>
+
+<div class="form-group">
+<label>Start Date</label>
+<input type="date" class="form-control" formControlName="startDate">
+</div>
+
+<div class="form-group">
+<label>Duration Days</label>
+<input type="number" class="form-control" formControlName="durationDays">
+</div>
+
+<div class="form-group">
+<label>Product Id</label>
+<input type="number" class="form-control" formControlName="productId">
+</div>
+
+<button class="btn btn-primary mt-3 me-3">Create Offer</button>
+<button routerLink="/updateoffer" class="btn btn-warning mt-3 me-3">Update Offers</button>
+<button routerLink="/deleteoffer" class="btn btn-danger mt-3 me-3">Delete Offers</button>
+
+</form>
