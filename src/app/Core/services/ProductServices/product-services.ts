@@ -14,7 +14,7 @@ export class ProductServices {
 
 
   CreateProduct(product:IProductSForOffers):Observable<any>{
-    return this.httpClient.post(`http://ourtholandadmin.runasp.net/CreateProduct`,product);
+    return this.httpClient.post(`https://ourtholandadmin.runasp.net/CreateProduct`,product);
   }
 
 UpdateProduct(id:number , product:IUpdateProduct):Observable<any>{
