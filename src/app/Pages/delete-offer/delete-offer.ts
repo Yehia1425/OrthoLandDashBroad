@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-delete-offer',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './delete-offer.html',
   styleUrl: './delete-offer.css',
 })

@@ -1,0 +1,75 @@
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+
+  <div class="input-group mb-4">
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search product..."
+      formControlName="search"
+    >
+
+    <button class="btn btn-primary">
+      Search
+    </button>
+
+  </div>
+
+</form>
+
+
+<div class="row">
+
+@for (pro of products; track $index) {
+      <div >
+
+<div class="card h-100 shadow-sm">
+
+  <img [src]="pro?.picturesUrls?.[0]" class="card-img-top" alt="product image">
+
+  <div class="card-body">
+
+    <h5 class="card-title">{{pro.name}}</h5>
+
+    <p class="card-text text-muted">
+      {{pro.description}}
+    </p>
+
+    <p class="fw-bold text-success fs-5">
+      {{pro.price}} EGP
+    </p>
+
+    <div class="mb-2">
+      <span class="badge bg-primary me-2" *ngIf="pro.size">
+        Size: {{pro.size}}
+      </span>
+
+      <span class="badge bg-info text-dark" *ngIf="pro.color">
+        Color: {{pro.color}}
+      </span>
+    </div>
+
+    <p class="mb-1">
+      ⭐ Rating: {{pro.rate}}
+    </p>
+
+    <p class="mb-1">
+      📦 Stock: {{pro.stock}}
+    </p>
+
+    <p class="mb-1">
+      🔥 Sold: {{pro.soldNumber}}
+    </p>
+
+  </div>
+
+
+
+</div>
+
+  </div>
+}
+
+</div>

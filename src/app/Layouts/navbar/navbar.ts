@@ -15,7 +15,7 @@ import { NgxSpinnerComponent, NgxSpinnerModule, NgxSpinnerService } from 'ngx-sp
 
 @Component({
   selector: 'app-navbar',
-  imports: [UpdateOffer, DeleteOffer, ViewOrder, RouterLink, RouterOutlet],
+  imports: [UpdateOffer, DeleteOffer, ViewOrder, RouterLink, RouterOutlet,NgxSpinnerComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

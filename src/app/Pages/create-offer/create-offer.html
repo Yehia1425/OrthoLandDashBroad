@@ -26,7 +26,39 @@
 </div>
 
 <button class="btn btn-primary mt-3 me-3">Create Offer</button>
-<button routerLink="/updateoffer" class="btn btn-warning mt-3 me-3">Update Offers</button>
-<button routerLink="/deleteoffer" class="btn btn-danger mt-3 me-3">Delete Offers</button>
-
 </form>
+
+
+<div class="container mt-5">
+  <div class="row g-4">
+
+    <!-- Update Offers Card -->
+    <div routerLink="/updateoffer"  class="col-md-6">
+      <div class="card custom-card h-100 text-center p-4">
+        <div class="card-body">
+          <i class="bi bi-tag-fill display-4 text-warning"></i>
+          <h4 class="mt-3">Update Offers</h4>
+          <p class="text-muted">Edit and update offers easily.</p>
+          <button routerLink="/updateoffer" class="btn btn-warning px-4">
+            Update Offers
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Offers Card -->
+    <div routerLink="/deleteoffer" class="col-md-6">
+      <div class="card custom-card h-100 text-center p-4">
+        <div class="card-body">
+          <i class="bi bi-trash-fill display-4 text-danger"></i>
+          <h4 class="mt-3">Delete Offers</h4>
+          <p class="text-muted">Remove offers from the system.</p>
+          <button routerLink="/deleteoffer" class="btn btn-danger px-4">
+            Delete Offers
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

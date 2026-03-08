@@ -12,7 +12,7 @@ export const routes: Routes = [
             {
                 path: 'product',
                 loadComponent: () => import('./Pages/product/product').then(m => m.Product),
-                title: 'Product Page'
+                title: 'Create Product Page'
             },
             {
                 path: 'updateProduct',
@@ -28,6 +28,11 @@ export const routes: Routes = [
                 path: 'createcategories',
                 loadComponent: () => import('./Pages/create-categories/create-categories').then(m => m.CreateCategories),
                 title: 'Create Categories Page'
+            },
+            {
+                path: 'sreach',
+                loadComponent: () => import('./Pages/Search/search/search').then(m => m.Search),
+                title: 'Search Page'
             },
             {
                 path: 'updatecategories',

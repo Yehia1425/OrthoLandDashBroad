@@ -23,32 +23,32 @@ offerForm: FormGroup = new FormGroup({
   productId: new FormControl('')
 });
 
-
 CreateOffer(offer: IOffer): void {
   this.offerServices.CreateOffer(offer).subscribe({
+
     next: (response) => {
       console.log(response);
-       this.ToastrService.success("Create Offer","Create Offer Succefully")
-
+      this.ToastrService.success("Create Offer","Create Offer Successfully");
     },
-    error: (error) => {
-      console.log(error);
-             this.ToastrService.error("Fail Create Offer","Create Offer Fail")
 
+    error: (error) => {
+      console.log(error.error);   // هنا ستظهر رسالة السيرفر
+      this.ToastrService.error("Fail Create Offer","Create Offer Fail");
     }
+
   });
 }
 
 submitOffer(): void {
 
-  const offer: IOffer = {
-    buyQuantity: this.offerForm.value.buyQuantity,
-    getQuantity: this.offerForm.value.getQuantity,
-    startDate: this.offerForm.value.startDate + "T00:00:00",
-    durationDays: this.offerForm.value.durationDays,
-    productId: this.offerForm.value.productId
-  };
+const offer: IOffer = {
+  buyQuantity: Number(this.offerForm.value.buyQuantity),
+  getQuantity: Number(this.offerForm.value.getQuantity),
+  startDate: this.offerForm.value.startDate,   // بدون T00:00:00
+  durationDays: Number(this.offerForm.value.durationDays),
+  productId: Number(this.offerForm.value.productId)
+};
 
-  this.CreateOffer(offer);
-}
-}
+this.CreateOffer(offer);
+
+}}
