@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class Search {
   private readonly ToastrService=inject(ToastrService);
 
-  BaseUrl = "http://ourtholandadmin.runasp.net";
+  BaseUrl = "https://ourtholandadmin.runasp.net";
 
   products: ISearchProduct[] = [];
 
