@@ -33,17 +33,15 @@ getOrders(){
   .subscribe({
     next:(res)=>{
       console.log(res);
-     this.orders.set(res);
-            this.ToastrService.success("Create View Order","Create View Order Succefully")
-
-
+      this.orders.set(res);
+      this.ToastrService.success("View Orders","Orders Loaded Successfully");
     },
     error:(err)=>{
       console.log(err.error);
-                  this.ToastrService.error("Fail View Order","Fail View Order Succefully")
-
+      this.ToastrService.error("View Orders","Failed To Load Orders");
     }
   });
+
 }
 
 
@@ -56,13 +54,12 @@ confirmOrder(id:number){
 
       // إعادة تحميل الطلبات
       this.getOrders();
-        this.ToastrService.success("Create View Order","Create View Order Succefully")
 
-
+      this.ToastrService.success("Confirm Order","Order Confirmed Successfully");
     },
     error:(err)=>{
       console.log(err);
-         this.ToastrService.error("Fail View Order","Fail View Order Succefully")
+      this.ToastrService.error("Confirm Order","Failed To Confirm Order");
     }
   });
 

@@ -29,18 +29,23 @@ export class Deleteproduct {
 
 
 
-  deleteProduct(){
+deleteProduct(){
 
-    const id = this.deleteForm.value.id;
+  const id = this.deleteForm.value.id;
 
-    this.http.delete(`${this.BaseUrl}/DeleteProduct/${id}`)
-    .subscribe(res=>{
-      console.log("Product Deleted",res);
-      this.ToastrService.success("Delete Product","Delete Product Succefully")
+  this.http.delete(`${this.BaseUrl}/DeleteProduct/${id}`)
+  .subscribe({
+    next: (res) => {
+      console.log("Product Deleted", res);
+      this.ToastrService.success("Delete Product", "Delete Product Successfully");
+    },
+    error: (err) => {
+      console.error("Delete Failed", err);
+      this.ToastrService.error("Delete Product", "Delete Product Failed");
+    }
+  });
 
-    });
-
-  }
+}
 
 }
 

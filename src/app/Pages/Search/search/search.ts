@@ -32,36 +32,37 @@ export class Search {
     );
   }
 
-  onSearch(){
+onSearch(){
 
-    const value = this.searchForm.value.search;
+  const value = this.searchForm.value.search;
 
-    if(value){
+  if(value){
 
-      this.searchProducts(value).subscribe({
+    this.searchProducts(value).subscribe({
 
-        next:(res)=>{
-          this.ToastrService.success("Create Product","Create Product Succefully")
-          // تصليح روابط الصور
-          this.products = res.map(p => ({
-            ...p,
-            picturesUrls: p.picturesUrls.map(img =>
-              img.replace('runasp.netimages','runasp.net/images')
-            )
+      next:(res)=>{
+        console.log("Search Result", res);
+        this.ToastrService.success("Search Products","Search Successfully");
 
-            
-          }));
+        // تصليح روابط الصور
+        this.products = res.map(p => ({
+          ...p,
+          picturesUrls: p.picturesUrls.map(img =>
+            img.replace('runasp.netimages','runasp.net/images')
+          )
+        }));
 
-        },
+      },
+
       error:(error)=>{
         console.log(error.error);
-         this.ToastrService.error("Create Fail","Create Falid")
+        this.ToastrService.error("Search Products","Search Failed");
       }
 
-      });
-
-    }
+    });
 
   }
+
+}
 
 }

@@ -20,16 +20,20 @@ deleteOfferForm = new FormGroup({
 });
 
 constructor(private http: HttpClient) {}
-
 deleteOffer() {
 
   const id = this.deleteOfferForm.value.id;
 
   this.http.delete(`${this.BaseUrl}/DeleteOffer/${id}`)
-    .subscribe(res => {
-      console.log("Offer Deleted", res);
-             this.ToastrService.success("Delete Offer","Delete Offer Succefully")
-
+    .subscribe({
+      next: (res) => {
+        console.log("Offer Deleted", res);
+        this.ToastrService.success("Delete Offer", "Delete Offer Successfully");
+      },
+      error: (err) => {
+        console.error("Delete Offer Failed", err);
+        this.ToastrService.error("Delete Offer", "Delete Offer Failed");
+      }
     });
 
 }

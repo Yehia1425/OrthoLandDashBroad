@@ -31,10 +31,15 @@ updateOffer() {
   };
 
   this.http.put(`${this.BaseUrl}/UpdateOffer/${id}`, body)
-    .subscribe(res => {
-      console.log("Offer Updated", res);
-      this.ToastrService.success("Update Offer","Update Offer Succefully")
-
+    .subscribe({
+      next: (res) => {
+        console.log("Offer Updated", res);
+        this.ToastrService.success("Update Offer", "Update Offer Successfully");
+      },
+      error: (err) => {
+        console.error("Update Offer Failed", err);
+        this.ToastrService.error("Update Offer", "Update Offer Failed");
+      }
     });
 
 }

@@ -31,9 +31,15 @@ updateCategory() {
   };
 
   this.http.put(`${this.BaseUrl}/UpdateCategory/${id}`, body)
-    .subscribe(res => {
-      console.log("Category Updated", res);
-     this.ToastrService.success("Update Categories","Update Categories Succefully")
+    .subscribe({
+      next: (res) => {
+        console.log("Category Updated", res);
+        this.ToastrService.success("Update Categories", "Update Categories Successfully");
+      },
+      error: (err) => {
+        console.error("Update Failed", err);
+        this.ToastrService.error("Update Categories", "Update Categories Failed");
+      }
     });
 
 }

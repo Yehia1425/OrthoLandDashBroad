@@ -21,16 +21,23 @@ BaseUrl = "http://ourtholandadmin.runasp.net";
 deleteCategoryForm = new FormGroup({
   id: new FormControl('')
 });
-
 deleteCategory(){
 
   const id = this.deleteCategoryForm.value.id;
 
   this.http.delete(`${this.BaseUrl}/DeleteCategory/${id}`)
-  .subscribe(res=>{
-    console.log("Category Deleted", res);
-     this.ToastrService.success("Delete Categories","Delete Categories Succefully")
+  .subscribe({
+    next: (res) => {
+      console.log("Category Deleted", res);
+      this.ToastrService.success("Delete Categories", "Delete Categories Successfully");
+    },
+    error: (err) => {
+      console.error("Delete Failed", err);
+      this.ToastrService.error("Delete Categories", "Delete Categories Failed");
+    }
   });
 
 }
+
 }
+
