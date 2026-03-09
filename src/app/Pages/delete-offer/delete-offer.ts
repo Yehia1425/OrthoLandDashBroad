@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
 export class DeleteOffer {
 
       private readonly ToastrService=inject(ToastrService);
-BaseUrl = "http://ourtholandadmin.runasp.net";
+BaseUrl = "https://ourtholandadmin.runasp.net";
 
 deleteOfferForm = new FormGroup({
   id: new FormControl('')

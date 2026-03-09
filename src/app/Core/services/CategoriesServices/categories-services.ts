@@ -11,7 +11,7 @@ export class CategoriesServices {
     constructor( private http:HttpClient){}
 
   CreateCategories(categories:ICategoriesCreate):Observable<any>{
-    return this.http.post(`http://ourtholandadmin.runasp.net/CreateCategory`, categories);
+    return this.http.post(`https://ourtholandadmin.runasp.net/CreateCategory`, categories);
   }
 
 

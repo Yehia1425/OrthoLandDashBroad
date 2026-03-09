@@ -20,7 +20,7 @@ export class Deleteproduct {
 
 
   constructor(private http: HttpClient) {}
-   BaseUrl = "http://ourtholandadmin.runasp.net";
+   BaseUrl = "https://ourtholandadmin.runasp.net";
 
 
   deleteForm = new FormGroup({

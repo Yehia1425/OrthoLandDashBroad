@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
 export class UpdateCategories {
     private readonly ToastrService=inject(ToastrService);
 
-BaseUrl = "http://ourtholandadmin.runasp.net";
+BaseUrl = "https://ourtholandadmin.runasp.net";
 
 updateCategoryForm = new FormGroup({
   id: new FormControl(''),

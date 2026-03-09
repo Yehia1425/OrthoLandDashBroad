@@ -20,7 +20,7 @@ export class ProductServices {
 UpdateProduct(id:number , product:IUpdateProduct):Observable<any>{
 
   return this.httpClient.put(
-    `http://ourtholandadmin.runasp.net/UpdateProduct/${id}`,
+    `https://ourtholandadmin.runasp.net/UpdateProduct/${id}`,
     product
   )
 

@@ -14,7 +14,7 @@ export class UpdateProduct {
   private readonly ToastrService=inject(ToastrService);
 
 
-    BaseUrl = "http://ourtholandadmin.runasp.net";
+    BaseUrl = "https://ourtholandadmin.runasp.net";
  updateProductForm = new FormGroup({
     id: new FormControl(''),
     price: new FormControl(''),

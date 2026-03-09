@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './view-order.css',
 })
 export class ViewOrder {
-BaseUrl = "http://ourtholandadmin.runasp.net";
+BaseUrl = "https://ourtholandadmin.runasp.net";
 
 orders:WritableSignal<IViewOrder[]>=signal([]);
 

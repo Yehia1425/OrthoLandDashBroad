@@ -11,6 +11,6 @@ export class OfferServices {
   constructor(private http:HttpClient){}
 
   CreateOffer(Offers:IOffer):Observable<any>{
-return this.http.post(`http://ourtholandadmin.runasp.net/CreateOffer`,Offers)
+return this.http.post(`https://ourtholandadmin.runasp.net/CreateOffer`,Offers)
   }
 }

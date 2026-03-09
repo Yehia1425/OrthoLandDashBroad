@@ -16,7 +16,7 @@ constructor(private http: HttpClient) {}
     private readonly ToastrService=inject(ToastrService);
 
 
-BaseUrl = "http://ourtholandadmin.runasp.net";
+BaseUrl = "https://ourtholandadmin.runasp.net";
 
 deleteCategoryForm = new FormGroup({
   id: new FormControl('')
