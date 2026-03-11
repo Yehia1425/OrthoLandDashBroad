@@ -20,12 +20,55 @@
 <input type="number" class="form-control" formControlName="durationDays">
 </div>
 
+<!-- Category -->
 <div class="form-group">
-<label>Product Id</label>
-<input type="number" class="form-control" formControlName="productId">
+
+<label>Category</label>
+
+<select
+class="form-control"
+formControlName="categoryId"
+(change)="getProductsByCategory($any($event.target).value)"
+>
+
+<option value="">Select Category</option>
+
+@for (cat of categories(); track cat.id) {
+
+<option [value]="cat.id">
+{{cat.name}}
+</option>
+
+}
+
+</select>
+
 </div>
 
-<button class="btn btn-primary mt-3 me-3">Create Offer</button>
+<!-- Product -->
+<div class="form-group">
+
+<label>Product</label>
+
+<select class="form-control" formControlName="productId">
+
+<option value="">Select Product</option>
+
+@for (pro of products(); track pro.id) {
+
+<option [value]="pro.id">
+{{pro.name}}
+</option>
+
+}
+
+</select>
+
+</div>
+
+<button class="btn btn-primary mt-3 me-3">
+Create Offer
+</button>
 
 </form>
 

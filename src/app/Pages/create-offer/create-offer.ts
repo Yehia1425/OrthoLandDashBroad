@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { OfferServices } from '../../Core/services/OfferServices/offer-services';
+import { ProductServicesandCategories } from '../../Core/services/ProductServicesandCategories/product-servicesand-categories';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IOffer } from '../../Shared/Interface/ioffer';
+import { ICategories } from '../../Shared/Interface/icategories';
 import { RouterLink } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,33 +13,56 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-offer.html',
   styleUrl: './create-offer.css',
 })
-export class CreateOffer {
+export class CreateOffer implements OnInit {
 
   private readonly offerServices = inject(OfferServices);
-  private readonly ToastrService = inject(ToastrService);
+  private readonly productService = inject(ProductServicesandCategories);
+  private readonly toastr = inject(ToastrService);
+
+  categories: WritableSignal<ICategories[]> = signal([]);
+  products: WritableSignal<any[]> = signal([]);
 
   today: string = new Date().toISOString().split('T')[0];
 
   offerForm: FormGroup = new FormGroup({
     buyQuantity: new FormControl(''),
     getQuantity: new FormControl(''),
-    startDate: new FormControl(this.today), // تاريخ اليوم تلقائي
+    startDate: new FormControl(this.today),
     durationDays: new FormControl(''),
+    categoryId: new FormControl(''),
     productId: new FormControl('')
   });
+
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  getCategories(): void {
+    this.productService.GetAllCategories().subscribe({
+      next: (res) => {
+        this.categories.set(res);
+      }
+    });
+  }
+
+  getProductsByCategory(id: number): void {
+    this.productService.GetGetProductsByCategoryId(id).subscribe({
+      next: (res) => {
+        this.products.set(res);
+      }
+    });
+  }
 
   CreateOffer(offer: IOffer): void {
 
     this.offerServices.CreateOffer(offer).subscribe({
 
-      next: (response) => {
-        console.log(response);
-        this.ToastrService.success("Create Offer", "Create Offer Successfully");
+      next: () => {
+        this.toastr.success("Create Offer Successfully");
       },
 
-      error: (error) => {
-        console.log(error.error);
-        this.ToastrService.error("Fail Create Offer", "Create Offer Fail");
+      error: () => {
+        this.toastr.error("Create Offer Failed");
       }
 
     });

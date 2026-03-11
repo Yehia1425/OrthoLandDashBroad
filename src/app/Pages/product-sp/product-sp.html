@@ -1,0 +1,114 @@
+<section class="py-5  mt-5">
+
+  <div class="container mt-3">
+
+    <input
+      type="text"
+      placeholder="Search products..."
+      [formControl]="searchControl"
+      class="form-control mb-4"
+    >
+
+  </div>
+
+  <div class="container">
+    <div class="row g-4">
+
+      @for (pro of filteredProducts(); track pro.id) {
+
+        <div class="col-md-6 col-lg-4">
+
+<div class="card h-100 shadow-sm product-card">
+
+@if (pro.picturesUrls && pro.picturesUrls.length) {
+
+  <img
+    [src]="getImageUrl(pro.picturesUrls[0])"
+    class="card-img-top product-img"
+    alt="product image"
+  >
+
+}
+
+  <div class="card-body text-center">
+
+    <h5 class="card-title mb-2">
+      {{ pro.name }}
+    </h5>
+
+    <p class="text-muted mb-3">
+      {{ pro.description }}
+    </p>
+
+    <p class="text-primary fw-bold fs-5 mb-3">
+      {{ pro.price }} EGP
+    </p>
+
+    <div class="d-flex justify-content-between small mb-3">
+
+      <span class="text-warning fw-semibold">
+        ⭐ {{ pro.rate }}
+      </span>
+
+      <span class="text-success fw-medium">
+        📦 {{ pro.stock }}
+      </span>
+
+      <span class="text-muted">
+        🏷️ {{ pro.categoryId }}
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+        </div>
+
+      }
+
+    </div>
+
+<div class="container mt-5">
+  <div class="row g-4 justify-content-center">
+
+    <!-- Back To Categories -->
+    <div class="col-md-6">
+      <div routerLink="/categories" class="card custom-card h-100 text-center p-4">
+        <div class="card-body">
+
+          <i class="bi bi-arrow-left-circle display-4 text-primary"></i>
+          <h4 class="mt-3">Back To Categories</h4>
+          <p class="text-muted">Return to categories page.</p>
+
+          <button class="btn btn-primary px-4">
+            Back
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Product -->
+    <div class="col-md-6">
+      <div routerLink="/product" class="card custom-card h-100 text-center p-4">
+        <div class="card-body">
+
+          <i class="bi bi-plus-circle display-4 text-success"></i>
+          <h4 class="mt-3">Create Product</h4>
+          <p class="text-muted">Add a new product to the system.</p>
+
+          <button class="btn btn-success px-4">
+            Create Product
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+
+</section>

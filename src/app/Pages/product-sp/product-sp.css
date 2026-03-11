@@ -1,0 +1,14 @@
+.product-card{
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.product-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card-img-top{
+height: 220px;
+object-fit: cover;
+}

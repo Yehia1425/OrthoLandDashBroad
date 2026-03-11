@@ -1,38 +1,57 @@
-<body class="login-page">
-
 <div class="container min-vh-100 d-flex align-items-center justify-content-center">
 
-    <div class="login-card p-4">
+<div class="login-card p-4">
 
-        <!-- Header -->
-        <div class="text-center mb-4">
-            <h2 class="text-white fw-bold">Login</h2>
-        </div>
+<div class="text-center mb-4">
+<h2 class="text-white fw-bold">Login</h2>
+</div>
 
-        <!-- Form -->
-        <form>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
 
-            <!-- Email -->
-            <div class="mb-3">
-                <label class="form-label text-light">Email address</label>
-                <input type="email" class="form-control custom-input" placeholder="name@example.com">
-            </div>
+<!-- UserName -->
+<div class="mb-3">
 
-            <!-- Password -->
-            <div class="mb-3">
-                <label class="form-label text-light">Password</label>
-                <input type="password" class="form-control custom-input" placeholder="Password">
-            </div>
+<label class="form-label text-light">User Name</label>
 
-            <!-- Button -->
-            <button type="submit" class="btn btn-primary w-100 login-btn">
-                Login
-            </button>
+<input 
+type="text"
+class="form-control custom-input"
+placeholder="User Name"
+formControlName="userName">
 
-        </form>
-
-    </div>
+@if(loginForm.controls.userName.touched && loginForm.controls.userName.invalid){
+<small class="text-danger">User Name is required</small>
+}
 
 </div>
 
-</body>
+<!-- Password -->
+<div class="mb-3">
+
+<label class="form-label text-light">Password</label>
+
+<input
+type="password"
+class="form-control custom-input"
+placeholder="Password"
+formControlName="password">
+
+@if(loginForm.controls.password.touched && loginForm.controls.password.invalid){
+<small class="text-danger">Password is required</small>
+}
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary w-100 login-btn"
+[disabled]="loginForm.invalid">
+
+Login
+
+</button>
+
+</form>
+
+</div>
+</div>

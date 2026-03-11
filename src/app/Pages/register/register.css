@@ -1,0 +1,42 @@
+.login-page{
+    background:#111827;
+}
+
+/* Card */
+
+.login-card{
+    max-width:420px;
+    width:100%;
+    background:rgba(31,41,55,0.5);
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Inputs */
+
+.custom-input{
+    background:#111827;
+    border:1px solid #374151;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+}
+
+.custom-input:focus{
+    background:#111827;
+    color:white;
+    border-color:#3b82f6;
+    box-shadow:0 0 0 2px rgba(59,130,246,.5);
+}
+
+/* Button */
+
+.login-btn{
+    padding:12px;
+    font-weight:bold;
+    border-radius:10px;
+}
+
+.login-btn:hover{
+    background:#1d4ed8;
+}

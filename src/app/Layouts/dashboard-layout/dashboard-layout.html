@@ -1,0 +1,64 @@
+    <header>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" routerLink="/home" >DashBorad</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Security</div>
+                        <a class="nav-link" routerLink="admincreate">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                           Admin Roles
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">Website</div>
+                        <a class="nav-link" routerLink="/categories" >
+                            <div class="sb-nav-link-icon"></div>
+                            Products
+                        </a>
+                        <a class="nav-link" routerLink="/createcategories">
+                            <div class="sb-nav-link-icon"></div>
+                            Categories
+                        </a>
+                        <a class="nav-link" routerLink="/createoffer">
+                            <div class="sb-nav-link-icon"></div>
+                            Offers
+                        </a>
+                        <a class="nav-link" routerLink="/vieworder">
+                            <div class="sb-nav-link-icon"></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" routerLink="/sreach">
+                            <div class="sb-nav-link-icon"></div>
+                            Search Product
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+        <div id="layoutSidenav_content" class="mt-4">
+            <div class="container">
+                <main role="main" class="pb-3">
+                <router-outlet></router-outlet>
+                <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+                </main>
+            </div>
+
+        </div>
+    </div>
+
+

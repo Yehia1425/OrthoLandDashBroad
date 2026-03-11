@@ -1,19 +1,32 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, throwError } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const toastrService=inject(ToastrService)
+const toastr = inject(ToastrService);
 
+  return next(req).pipe(
 
+    catchError((error: HttpErrorResponse) => {
 
+      let message = "Server Error";
 
-  return next(req).pipe(catchError((err)=>{
-    console.log('interceptors', err.error.message)
-    toastrService.error(err.error.message,'OrthoLandDashBroad')
+      if (error?.error?.message) {
+        message = error.error.message;
+      } 
+      else if (error?.message) {
+        message = error.message;
+      }
 
+      if (typeof window !== 'undefined') {
+        toastr.error(message);
+      }
 
-    return throwError(()=>err)
-  }))
+      return throwError(() => error);
+
+    })
+
+  );
+
 };
