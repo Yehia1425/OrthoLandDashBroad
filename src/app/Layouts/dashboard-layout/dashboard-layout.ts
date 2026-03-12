@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { NgxSpinnerComponent } from "ngx-spinner";
 
@@ -9,5 +9,9 @@ import { NgxSpinnerComponent } from "ngx-spinner";
   styleUrl: './dashboard-layout.css',
 })
 export class DashboardLayout {
+  private cdr = inject(ChangeDetectorRef);
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 }

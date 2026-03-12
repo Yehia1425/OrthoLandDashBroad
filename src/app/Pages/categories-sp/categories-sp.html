@@ -1,4 +1,4 @@
-<section class="py-5  mt-5">
+<section class="py-5 mt-5" >
 
   <div class="container">
     <div class="row g-4">
@@ -8,10 +8,19 @@
       <div class="col-md-6 col-lg-4">
 
         <div 
-        class="bg-white p-4 rounded text-center shadow-sm h-100 category-card"
+        class="bg-primary p-4 rounded text-center shadow-sm h-100 category-card"
         [routerLink]="['/product', pro.id]">
 
-          <h3 class="h5 fw-semibold mb-2">
+          <div class="category-img-wrapper mb-3">
+
+<img
+  [src]="getImageUrl(pro.logoUrl)"
+  [alt]="pro.name"
+  class="category-img">
+
+          </div>
+
+          <h3 class="h5 fw-semibold mb-2 text-white">
             {{ pro.name }}
           </h3>
 

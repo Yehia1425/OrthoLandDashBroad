@@ -1,57 +1,75 @@
-<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+<div class="bg-dark d-flex align-items-center justify-content-center" style="min-height:100vh">
 
-<div class="login-card p-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
 
-<div class="text-center mb-4">
-<h2 class="text-white fw-bold">Login</h2>
-</div>
+        <!-- Card -->
+        <div class="card bg-secondary bg-opacity-25 border-0 shadow-lg rounded-4 p-4">
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <h2 class="text-white fw-bold">Login</h2>
+          </div>
 
-<!-- UserName -->
-<div class="mb-3">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-<label class="form-label text-light">User Name</label>
+            <!-- UserName -->
+            <div class="form-floating mb-3">
 
-<input 
-type="text"
-class="form-control custom-input"
-placeholder="User Name"
-formControlName="userName">
+              <input
+                type="text"
+                class="form-control form-control-lg rounded-3 bg-dark text-white border-0"
+                placeholder="User Name"
+                formControlName="userName"
+                id="userName">
 
-@if(loginForm.controls.userName.touched && loginForm.controls.userName.invalid){
-<small class="text-danger">User Name is required</small>
-}
+              <label for="userName">User Name</label>
 
-</div>
+              @if(loginForm.controls.userName.touched && loginForm.controls.userName.invalid){
+                <small class="text-danger">User Name is required</small>
+              }
 
-<!-- Password -->
-<div class="mb-3">
+            </div>
 
-<label class="form-label text-light">Password</label>
+            <!-- Password -->
+            <div class="form-floating mb-3">
 
-<input
-type="password"
-class="form-control custom-input"
-placeholder="Password"
-formControlName="password">
+              <input
+                type="password"
+                class="form-control form-control-lg rounded-3 bg-dark text-white border-0"
+                placeholder="Password"
+                formControlName="password"
+                id="password">
 
-@if(loginForm.controls.password.touched && loginForm.controls.password.invalid){
-<small class="text-danger">Password is required</small>
-}
+              <label for="password">Password</label>
 
-</div>
+              @if(loginForm.controls.password.touched && loginForm.controls.password.invalid){
+                <small class="text-danger">Password is required</small>
+              }
 
-<button
-type="submit"
-class="btn btn-primary w-100 login-btn"
-[disabled]="loginForm.invalid">
+            </div>
 
-Login
+            <!-- Button -->
+            <div class="d-grid mt-4">
 
-</button>
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg rounded-3 fw-bold"
+                [disabled]="loginForm.invalid">
 
-</form>
+                Login
 
-</div>
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>

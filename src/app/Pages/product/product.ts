@@ -32,7 +32,10 @@ export class Product implements OnInit {
     categoryId: new FormControl(''),
     picture1: new FormControl(''),
     picture2: new FormControl(''),
-    picture3: new FormControl('')
+    picture3: new FormControl(''),
+  size: new FormControl(''),
+  color: new FormControl(''),
+  type: new FormControl('')
   });
 
   ngOnInit(): void {
@@ -106,6 +109,9 @@ uploadImage(event: any, controlName: string): void {
       rate: this.productForm.value.rate,
       stock: this.productForm.value.stock,
       categoryId: this.productForm.value.categoryId,
+     size: this.productForm.value.size,
+    color: this.productForm.value.color,
+    type: this.productForm.value.type,
       PicturesUrls: [
         this.productForm.value.picture1,
         this.productForm.value.picture2,

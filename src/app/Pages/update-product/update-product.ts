@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink } from "@angular/router";
+import { RouterLink, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-update-product',
@@ -11,11 +11,13 @@ import { RouterLink } from "@angular/router";
   styleUrl: './update-product.css',
 })
 export class UpdateProduct {
-  private readonly ToastrService=inject(ToastrService);
 
+  private readonly ToastrService = inject(ToastrService);
+  private route = inject(ActivatedRoute);
 
-    BaseUrl = "https://ourtholandadmin.runasp.net";
- updateProductForm = new FormGroup({
+  BaseUrl = "https://ourtholandadmin.runasp.net";
+
+  updateProductForm = new FormGroup({
     id: new FormControl(''),
     price: new FormControl(''),
     categoryId: new FormControl(''),
@@ -25,30 +27,52 @@ export class UpdateProduct {
   });
 
   constructor(private http: HttpClient) {}
-updateProduct() {
 
-  const id = this.updateProductForm.value.id;
+  ngOnInit() {
 
-  const body = {
-    price: this.updateProductForm.value.price,
-    categoryId: this.updateProductForm.value.categoryId,
-    stock: this.updateProductForm.value.stock,
-    description: this.updateProductForm.value.description,
-    rate: this.updateProductForm.value.rate
-  };
+    this.route.queryParams.subscribe(params => {
 
-  this.http.put(`${this.BaseUrl}/UpdateProduct/${id}`, body)
-    .subscribe({
-      next: (res) => {
-        console.log("Product Updated", res);
-        this.ToastrService.success("Update Product", "Update Product Successfully");
-      },
-      error: (err) => {
-        console.error("Update Failed", err);
-        this.ToastrService.error("Update Product", "Update Failed");
-      }
+      this.updateProductForm.patchValue({
+        id: params['id'],
+        description: params['description'],
+        price: params['price'],
+        rate: params['rate'],
+        stock: params['stock'],
+        categoryId: params['categoryId']
+      });
+
     });
 
-}
+  }
+
+  updateProduct() {
+
+    const id = this.updateProductForm.value.id;
+
+    const body = {
+      price: this.updateProductForm.value.price,
+      categoryId: this.updateProductForm.value.categoryId,
+      stock: this.updateProductForm.value.stock,
+      description: this.updateProductForm.value.description,
+      rate: this.updateProductForm.value.rate
+    };
+
+    this.http.put(`${this.BaseUrl}/UpdateProduct/${id}`, body)
+      .subscribe({
+        next: (res) => {
+
+          console.log("Product Updated", res);
+          this.ToastrService.success("Update Product", "Update Product Successfully");
+
+        },
+        error: (err) => {
+
+          console.error("Update Failed", err);
+          this.ToastrService.error("Update Product", "Update Failed");
+
+        }
+      });
+
+  }
 
 }

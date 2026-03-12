@@ -3,7 +3,6 @@ import { Component, inject } from '@angular/core';
 import { ISearchProduct } from '../../../Shared/Interface/isearch-product';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { error } from 'console';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,9 +13,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './search.css',
 })
 export class Search {
-  private readonly ToastrService=inject(ToastrService);
 
-  BaseUrl = "https://ourtholandadmin.runasp.net";
+  private readonly toastr = inject(ToastrService);
+
+  BaseUrl = "https://ourtholand.runasp.net";
 
   products: ISearchProduct[] = [];
 
@@ -28,41 +28,43 @@ export class Search {
 
   searchProducts(search: string){
     return this.http.get<ISearchProduct[]>(
-      `${this.BaseUrl}/GetProductsBySearch?search=${search}`
+      `https://ourtholandadmin.runasp.net/GetProductsBySearch?search=${search}`
     );
   }
 
-onSearch(){
+  // مسار الصورة
+  getImageUrl(img: string | null | undefined) {
 
-  const value = this.searchForm.value.search;
+    if (!img) return '';
 
-  if(value){
+    const cleanName = img.replace(/\s+/g, '_');
 
-    this.searchProducts(value).subscribe({
-
-      next:(res)=>{
-        console.log("Search Result", res);
-        this.ToastrService.success("Search Products","Search Successfully");
-
-        // تصليح روابط الصور
-        this.products = res.map(p => ({
-          ...p,
-          picturesUrls: p.picturesUrls.map(img =>
-            img.replace('runasp.netimages','runasp.net/images')
-          )
-        }));
-
-      },
-
-      error:(error)=>{
-        console.log(error.error);
-        this.ToastrService.error("Search Products","Search Failed");
-      }
-
-    });
-
+    return `${this.BaseUrl}/api/Attachment/get-image/${cleanName}`;
   }
 
-}
+  onSearch(){
+
+    const value = this.searchForm.get('search')?.value?.trim();
+
+    if(value){
+
+      this.searchProducts(value).subscribe({
+
+        next:(res)=>{
+          console.log(res);
+          this.products = res;
+          this.toastr.success("Search Successfully","Search Products");
+        },
+
+        error:(error)=>{
+          console.log(error.error);
+          this.toastr.error("Search Failed","Search Products");
+        }
+
+      });
+
+    }
+
+  }
 
 }

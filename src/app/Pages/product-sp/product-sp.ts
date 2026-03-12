@@ -32,37 +32,36 @@ getImageUrl(img: string) {
   return `${this.BaseUrl}/api/Attachment/get-image/${cleanName}`;
 }
 
-  ngOnInit(): void {
+ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
+  this.route.paramMap.subscribe(params => {
 
-      const id = params.get('id');
+    const id = params.get('id');
 
-      if (!id) {
-        console.error('Category id not found');
-        return;
-      }
+    if (!id || isNaN(Number(id))) {
+      return;
+    }
 
-      this.loadProducts(Number(id));
+    this.loadProducts(Number(id));
+
+  });
+
+  this.searchControl.valueChanges
+    .pipe(debounceTime(300))
+    .subscribe(value => {
+
+      const search = value?.toLowerCase() || '';
+
+      const filtered = this.products().filter(p =>
+        p.name.toLowerCase().includes(search) ||
+        p.description.toLowerCase().includes(search)
+      );
+
+      this.filteredProducts.set(filtered);
 
     });
 
-    this.searchControl.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe(value => {
-
-        const search = value?.toLowerCase() || '';
-
-        const filtered = this.products().filter(p =>
-          p.name.toLowerCase().includes(search) ||
-          p.description.toLowerCase().includes(search)
-        );
-
-        this.filteredProducts.set(filtered);
-
-      });
-
-  }
+}
 
   loadProducts(id: number): void {
 

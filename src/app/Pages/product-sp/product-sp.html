@@ -12,57 +12,95 @@
   </div>
 
   <div class="container">
-    <div class="row g-4">
+ <div class="row g-3">
 
       @for (pro of filteredProducts(); track pro.id) {
 
-        <div class="col-md-6 col-lg-4">
+        <div class="col-6 col-md-4 col-lg-3">
 
-<div class="card h-100 shadow-sm product-card">
+          <div class="card bg-white shadow-sm rounded p-2 product-card h-100">
 
-@if (pro.picturesUrls && pro.picturesUrls.length) {
+            <div>
 
-  <img
-    [src]="getImageUrl(pro.picturesUrls[0])"
-    class="card-img-top product-img"
-    alt="product image"
-  >
+              <!-- Image -->
+              <div class="img-holder rounded mb-2 d-flex justify-content-center align-items-center">
 
-}
+                @if (pro.picturesUrls && pro.picturesUrls.length) {
 
-  <div class="card-body text-center">
+                  <img
+                    [src]="getImageUrl(pro.picturesUrls[0])"
+                    class="product-img"
+                    alt="product image"
+                  >
 
-    <h5 class="card-title mb-2">
-      {{ pro.name }}
-    </h5>
+                }
 
-    <p class="text-muted mb-3">
-      {{ pro.description }}
-    </p>
+              </div>
 
-    <p class="text-primary fw-bold fs-5 mb-3">
-      {{ pro.price }} EGP
-    </p>
+              <!-- Caption -->
+              <div class="p-2">
 
-    <div class="d-flex justify-content-between small mb-3">
+                <h6 class="text-muted text-truncate mb-1">
+                  Category: {{ pro.categoryId }}
+                </h6>
 
-      <span class="text-warning fw-semibold">
-        ⭐ {{ pro.rate }}
-      </span>
+                <h5 class="text-truncate">
+                Name: {{ pro.name }}
+                </h5>
+                <h5 class="text-truncate">
+                Stock: {{ pro.stock }}
+                </h5>
+                <h5 class="text-truncate">
+                Sold Number: {{ pro.soldNumber }}
+                </h5>
 
-      <span class="text-success fw-medium">
-        📦 {{ pro.stock }}
-      </span>
+                <div class="d-flex justify-content-between align-items-center">
 
-      <span class="text-muted">
-        🏷️ {{ pro.categoryId }}
-      </span>
+                  <div class="d-flex align-items-center">
 
-    </div>
+                    <i class="fas fa-star text-warning me-1"></i>
 
-  </div>
+                    <span class="text-dark small">
+                    Rate: {{ pro.rate }}
+                    </span>
 
-</div>
+                    
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Bottom -->
+            <div class="d-flex justify-content-between align-items-center p-2 mt-auto">
+
+              <span class="fw-bold text-primary">
+                {{ pro.price }} EGP
+              </span>
+
+              <button
+                class="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
+                style="width:30px;height:30px"
+                [routerLink]="['/updateProduct']"
+                [queryParams]="{
+                  id: pro.id,
+                  description: pro.description,
+                  price: pro.price,
+                  rate: pro.rate,
+                  stock: pro.stock,
+                  categoryId: pro.categoryId
+                }">
+
+                <i class="fa-solid fa-pen"></i>
+
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
