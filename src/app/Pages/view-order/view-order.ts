@@ -31,7 +31,9 @@ export class ViewOrder {
     const startFrom = this.viewOrdersForm.value.startFrom;
     const notConfirmedOnly = this.viewOrdersForm.value.notConfirmedOnly;
 
-    this.http.get<IViewOrder[]>(`${this.BaseUrl}/ViewOrders?startFrom=${startFrom}&notConfirmedOnly=${notConfirmedOnly}`)
+    this.http.get<IViewOrder[]>(
+      `${this.BaseUrl}/ViewOrders?startFrom=${startFrom}&notConfirmedOnly=${notConfirmedOnly}`
+    )
     .subscribe({
       next:(res)=>{
         console.log(res);
@@ -68,7 +70,7 @@ export class ViewOrder {
   getPaymentName(paymentWay:number):string{
 
     if(paymentWay === 1){
-      return "Instalpay";
+      return "Instapay";
     }
 
     if(paymentWay === 2){

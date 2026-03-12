@@ -5,6 +5,7 @@ export interface IViewOrder{
   paymentWay: number;
   orderDate: string;
   totalPrice: number;
+  transferredAmount: number; // 👈 المبلغ المحول
   orderConfirmation: boolean;
   address: string;
   notes: string;
