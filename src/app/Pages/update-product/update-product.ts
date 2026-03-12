@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink, ActivatedRoute } from "@angular/router";
+import { RouterLink, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-product',
+  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './update-product.html',
   styleUrl: './update-product.css',
@@ -16,6 +17,8 @@ export class UpdateProduct {
   private route = inject(ActivatedRoute);
 
   BaseUrl = "https://ourtholandadmin.runasp.net";
+
+  isFromCard = false;
 
   updateProductForm = new FormGroup({
     id: new FormControl(''),
@@ -31,6 +34,10 @@ export class UpdateProduct {
   ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
+
+      if (params['id']) {
+        this.isFromCard = true;
+      }
 
       this.updateProductForm.patchValue({
         id: params['id'],

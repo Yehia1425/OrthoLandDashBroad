@@ -10,6 +10,7 @@ import { AttachmentService } from '../../Core/services/AttachmentService/attachm
 
 @Component({
   selector: 'app-product',
+  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './product.html',
   styleUrl: './product.css',
@@ -18,7 +19,7 @@ export class Product implements OnInit {
 
   private readonly productServices = inject(ProductServices);
   private readonly categoriesService = inject(ProductServicesandCategories);
-  private readonly ToastrService = inject(ToastrService);
+  private readonly toastr = inject(ToastrService);
   private readonly attachmentService = inject(AttachmentService);
 
   categories: WritableSignal<ICategories[]> = signal([]);
@@ -30,12 +31,16 @@ export class Product implements OnInit {
     rate: new FormControl(''),
     stock: new FormControl(''),
     categoryId: new FormControl(''),
+
+    size: new FormControl(''),
+    color: new FormControl(''),
+    type: new FormControl(''),
+
     picture1: new FormControl(''),
     picture2: new FormControl(''),
     picture3: new FormControl(''),
-  size: new FormControl(''),
-  color: new FormControl(''),
-  type: new FormControl('')
+    picture4: new FormControl(''),
+    picture5: new FormControl('')
   });
 
   ngOnInit(): void {
@@ -52,55 +57,60 @@ export class Product implements OnInit {
       }
     });
   }
-uploadImage(event: any, controlName: string): void {
 
-  const file = event.target.files[0];
-  if (!file) return;
+  uploadImage(event: any, controlName: string): void {
 
-  // تغيير اسم الملف واستبدال المسافات بـ _
-  const newFileName = file.name.replace(/\s+/g, '_');
+    const file = event.target.files[0];
+    if (!file) return;
 
-  const renamedFile = new File([file], newFileName, {
-    type: file.type
-  });
+    const newFileName = file.name.replace(/\s+/g, '_');
 
-  this.attachmentService.uploadImage(renamedFile).subscribe({
+    const renamedFile = new File([file], newFileName, {
+      type: file.type
+    });
 
-    next: (res) => {
+    this.attachmentService.uploadImage(renamedFile).subscribe({
 
-      const fileName = newFileName;
+      next: () => {
 
-      this.productForm.get(controlName)?.setValue(fileName);
+        this.productForm.get(controlName)?.setValue(newFileName);
 
-      console.log("Image Name:", fileName);
+        this.toastr.success("Image Uploaded Successfully");
 
-      this.ToastrService.success("Image Uploaded");
+      },
 
-    },
+      error: (err) => {
+        console.log(err);
+        this.toastr.error("Upload Failed");
+      }
 
-    error: (err) => {
-      console.log(err);
-      this.ToastrService.error("Upload Failed");
-    }
+    });
 
-  });
-
-}
+  }
 
   CreateProduct(product: IProductSForOffers): void {
     this.productServices.CreateProduct(product).subscribe({
       next: (response) => {
         console.log(response);
-        this.ToastrService.success("Create Product", "Create Product Successfully");
+        this.toastr.success("Create Product Successfully");
+        this.productForm.reset();
       },
       error: (error) => {
         console.log(error.error);
-        this.ToastrService.error("Create Fail", "Create Failed");
+        this.toastr.error("Create Product Failed");
       }
     });
   }
 
   submitProduct(): void {
+
+    const pictures = [
+      this.productForm.value.picture1,
+      this.productForm.value.picture2,
+      this.productForm.value.picture3,
+      this.productForm.value.picture4,
+      this.productForm.value.picture5
+    ].filter((x: string) => x);
 
     const product: IProductSForOffers = {
       name: this.productForm.value.name,
@@ -109,14 +119,10 @@ uploadImage(event: any, controlName: string): void {
       rate: this.productForm.value.rate,
       stock: this.productForm.value.stock,
       categoryId: this.productForm.value.categoryId,
-     size: this.productForm.value.size,
-    color: this.productForm.value.color,
-    type: this.productForm.value.type,
-      PicturesUrls: [
-        this.productForm.value.picture1,
-        this.productForm.value.picture2,
-        this.productForm.value.picture3
-      ]
+      size: this.productForm.value.size,
+      color: this.productForm.value.color,
+      type: this.productForm.value.type,
+      PicturesUrls: pictures
     };
 
     this.CreateProduct(product);

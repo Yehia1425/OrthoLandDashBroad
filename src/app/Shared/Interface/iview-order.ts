@@ -1,17 +1,17 @@
-
 export interface IViewOrder{
   id: number;
   userName: string;
   userNumber: string;
+  paymentWay: number;
   orderDate: string;
   totalPrice: number;
   orderConfirmation: boolean;
   address: string;
   notes: string;
-  items: Item[]
+  items: Item[];
 }
 
-interface Item {
+export interface Item {
   name: string;
   price: number;
   quantity: number;
