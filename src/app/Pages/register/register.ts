@@ -16,6 +16,7 @@ export class Register {
   
   private authService = inject(AuthServices);
   private router = inject(Router);
+  private toaster = inject(ToastrService)
 
   loading: boolean = false;
 
@@ -33,10 +34,12 @@ this.authService.createAdmin(this.createAdminForm.value).subscribe({
 
   next: (res) => {
     console.log(res);
+    this.toaster.success("Craete Admin Successfully","Craete Admin")
   },
 
   error: (err) => {
     console.log(err);
+     this.toaster.error("Craete Admin Falied","Falied")
   }
 
 });

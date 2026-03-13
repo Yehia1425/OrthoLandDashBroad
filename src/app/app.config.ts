@@ -7,7 +7,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { errorInterceptor } from './Core/interceptors/ErrorInterceptior/error-interceptior-interceptor';
+
 
 
 
@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(),withInterceptors([loadingInterceptor,errorInterceptor])),
+    provideHttpClient(withFetch(),withInterceptors([loadingInterceptor])),
     provideAnimations(),
      provideToastr(),
      importProvidersFrom(NgxSpinnerModule),

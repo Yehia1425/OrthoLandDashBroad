@@ -38,7 +38,6 @@ export class ViewOrder {
       next:(res)=>{
         console.log(res);
         this.orders.set(res);
-        this.toastr.success("Orders Loaded Successfully","View Orders");
       },
       error:(err)=>{
         console.log(err.error);
